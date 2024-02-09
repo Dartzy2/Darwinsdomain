@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+</head>
+<body>
+    <h2>Login Form</h2>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get input values
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Create a string to write to the file
+            var dataToWrite = "Username: " + username + "\nPassword: " + password;
+
+            // Use Blob to create a file-like object and save it
+            var blob = new Blob([dataToWrite], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, "login_details.txt"); // You need FileSaver.js library for this
+            // Optionally, you can also send this data to a server for further processing
+            // Example: sendLoginDataToServer(username, password);
+        });
+
+        // Function to send login data to a server
+        function sendLoginDataToServer(username, password) {
+            // You can use AJAX or fetch to send data to a server
+            // Example:
+            // fetch('http://example.com/login', {
+            //     method: 'POST',
+            //     body: JSON.stringify({ username: username, password: password }),
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // })
+            // .then(response => {
+            //     // Handle response
+            // })
+            // .catch(error => {
+            //     // Handle error
+            // });
+        }
+    </script>
+    <!-- You also need to include FileSaver.js library in your HTML -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
+</body>
+</html>
